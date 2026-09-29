@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f1eb">
+  <title>楊千葳｜教育與數位學習媒材作品集</title>
+  <style>
+    :root {
+      --cream: #f7f1eb;
+      --paper: #fffdf9;
+      --pink: #e9c7c4;
+      --pink-dark: #b97879;
+      --rose: #f3e2df;
+      --brown: #51443e;
+      --muted: #83756e;
+      --sage: #a8b1a0;
+      --line: #e9dfd7;
+      --shadow: 0 14px 38px rgba(83, 61, 50, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--cream); color: var(--brown);
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.8;
+    }
+    a { color: inherit; text-decoration: none; }
+    .nav {
+      position: sticky; top: 0; z-index: 10; background: rgba(247,241,235,.92);
+      backdrop-filter: blur(12px); border-bottom: 1px solid rgba(233,223,215,.8);
+    }
+    .nav-inner {
+      max-width: 1120px; margin: auto; padding: 13px 28px; display: flex;
+      align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { font-weight: 800; letter-spacing: .08em; }
+    .nav-links { display: flex; gap: 25px; color: var(--muted); font-size: .9rem; }
+    .nav-links a:hover { color: var(--pink-dark); }
+    .wrap { width: min(1060px, calc(100% - 48px)); margin: auto; }
+    .hero { padding: 82px 0 72px; }
+    .hero-inner { display: grid; grid-template-columns: 1fr; align-items: center; gap: 0; }
+    .eyebrow { color: var(--pink-dark); font-size: .78rem; letter-spacing: .22em; font-weight: 800; }
+    h1 { font-size: clamp(2.3rem, 5vw, 4.3rem); line-height: 1.22; letter-spacing: .04em; margin: 14px 0 20px; }
+    .hero p { color: var(--muted); max-width: 700px; margin: 0; }
+    .hero-copy { max-width: 820px; }
+    .hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+    .pill { display: inline-block; border-radius: 99px; padding: 9px 19px; font-size: .88rem; font-weight: 700; }
+    .pill.primary { background: var(--pink-dark); color: white; }
+    .pill.secondary { border: 1px solid #d9c9bf; background: rgba(255,253,249,.55); }
+    section { padding: 58px 0; }
+    .section-head { margin-bottom: 26px; }
+    .section-kicker { color: var(--pink-dark); font-size: .76rem; letter-spacing: .2em; font-weight: 800; }
+    h2 { margin: 5px 0 0; font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: .04em; }
+    .section-intro { color: var(--muted); max-width: 720px; margin: 10px 0 0; }
+    .about-card, .timeline-card, .contact-card {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 24px; padding: 30px 34px;
+      box-shadow: var(--shadow);
+    }
+    .about-card p { margin: 0; color: #6e625c; }
+    .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .project {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+      box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease;
+      display: flex; flex-direction: column; min-width: 0; align-self: start;
+    }
+    .project:hover { transform: translateY(-4px); box-shadow: 0 18px 42px rgba(83,61,50,.12); }
+    /* 研究卡片收合時等高；展開後依內容延伸，並確保連結不被裁切 */
+    #research .project { min-height: 440px; height: auto; align-self: start; }
+    #research .project .project-cover { flex: 0 0 auto; }
+    #research .project:has(details[open]) { min-height: 440px; height: auto; }
+    #research .project-body { flex: 1 0 auto; }
+    .project img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; background: var(--rose); }
+    .project-cover { aspect-ratio: 16 / 10; display: flex; flex-direction: column; justify-content: center; padding: 24px 28px; position: relative; overflow: hidden; background: linear-gradient(135deg, #f4e5e0, #eee8dc); color: #6a514b; }
+    .project-cover::after { content: ""; position: absolute; width: 150px; height: 150px; border-radius: 50%; right: -28px; bottom: -70px; border: 1px solid rgba(185,120,121,.35); box-shadow: 0 0 0 16px rgba(255,255,255,.12), 0 0 0 34px rgba(185,120,121,.08); }
+    .project-cover span { font-size: .68rem; letter-spacing: .2em; color: var(--pink-dark); font-weight: 800; }
+    .project-cover strong { font-size: 1.35rem; line-height: 1.45; margin-top: 7px; letter-spacing: .05em; }
+    .project-body { padding: 18px 20px 21px; display: flex; flex-direction: column; flex: 1; }
+    .project-number { color: var(--pink-dark); font-size: .72rem; font-weight: 800; letter-spacing: .18em; }
+    h3 { font-size: 1.08rem; line-height: 1.5; margin: 6px 0 8px; }
+    .project p { color: var(--muted); font-size: .88rem; margin: 0 0 16px; flex: 1; }
+
+    .project-details { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+    .project-details summary { cursor: pointer; color: var(--pink-dark); font-size: .82rem; font-weight: 800; list-style: none; }
+    .project-details summary::-webkit-details-marker { display: none; }
+    .project-details summary::after { content: "＋"; float: right; font-weight: 700; }
+    .project-details[open] summary::after { content: "－"; }
+    .detail-content { padding: 10px 0 2px; color: #6e625c; font-size: .84rem; }
+    .detail-content p { margin: 0 0 9px; color: #6e625c; font-size: .84rem; }
+    .detail-content p:last-child { margin-bottom: 0; }
+    .detail-content strong { color: var(--brown); }
+
+    .other-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .other-card { background: rgba(255,253,249,.58); border: 1px solid #e9dfd7; border-radius: 14px; padding: 17px 19px; box-shadow: none; min-width: 0; }
+    .other-card h3 { margin: 0 0 5px; font-size: .98rem; }
+    .other-card p { color: var(--muted); font-size: .83rem; line-height: 1.7; margin: 0 0 10px; }
+    .other-card .project-links { margin-top: 8px; }
+    .other-card .project-link { font-size: .75rem; padding: 5px 10px; background: rgba(255,250,247,.72); }
+    @media (max-width: 600px) { .other-grid { grid-template-columns: 1fr; } }
+    .project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
+    .project-link { display: inline-flex; align-items: center; justify-content: center; border: 1px solid #e5c9c5; color: var(--pink-dark); background: #fffaf7; border-radius: 99px; padding: 6px 12px; font-weight: 750; font-size: .78rem; transition: .2s ease; }
+    .project-link:hover { background: var(--pink-dark); border-color: var(--pink-dark); color: white; }
+    .project-link span { margin-left: 5px; }
+    .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .timeline-card h3 { margin-top: 0; }
+    .timeline-card p { color: var(--muted); margin-bottom: 0; }
+    .contact-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .contact-card p { margin: 5px 0 0; color: var(--muted); }
+    footer { padding: 30px 0 42px; text-align: center; color: #9b8e86; font-size: .8rem; }
+    @media (max-width: 800px) {
+      .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .nav-inner { padding: 12px 18px; }
+      .nav-links { gap: 12px; font-size: .78rem; }
+      .wrap { width: min(100% - 36px, 500px); }
+      .hero { padding: 54px 0 42px; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-copy { margin: auto; }
+      .hero p { margin: auto; }
+      .hero-actions { justify-content: center; }
+      section { padding: 42px 0; }
+      .project-grid, .two-col { grid-template-columns: 1fr; }
+      .about-card, .timeline-card, .contact-card { padding: 23px; }
+      .contact-card { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 390px) {
+      .nav-links { gap: 8px; }
+      .nav-links a { font-size: .72rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">QIAN-WEI YANG</a>
+      <div class="nav-links">
+        <a href="#about">關於我</a>
+        <a href="#media">學習媒材</a>
+        <a href="#teaching">教材設計</a>
+        <a href="#research">研究經驗</a>
+        <a href="#other">其他表現</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow">EDUCATION × DIGITAL LEARNING</div>
+        <h1>楊千葳<br>教育與數位學習媒材作品集</h1>
+        <p>以教育專業為基礎，結合數位媒材設計與教學實作，持續探索如何讓學習內容更貼近學習者的需求，並透過設計與研究累積經驗。</p>
+        <div class="hero-actions">
+          <a class="pill primary" href="#media">探索作品</a>
+          <a class="pill secondary" href="#about">認識我</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">ABOUT ME</div>
+          <h2>關於我</h2>
+        </div>
+        <div class="about-card">
+          <p>我具備教育專業背景，並持續投入數位教材、互動遊戲與教學活動的設計。在實作過程中，我重視教材內容與學習目標的連結，也會從學習者的角度思考操作流程、視覺呈現及學習體驗。期望未來能進一步結合研究方法與媒材設計，發展兼具教育意義與實用性的學習資源。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="media">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">LEARNING MEDIA & DESIGN</div>
+          <h2>學習媒材與設計</h2>
+          <p class="section-intro">從遊戲化學習、數位數學教材到文化教育，運用數位工具與教學設計轉化學習內容，並依作品類型提供對應資料。</p>
+        </div>
+        <div class="project-grid">
+          <article class="project">
+            <img src="images/2.jpg" alt="避震任務作品封面">
+            <div class="project-body"><div class="project-number">01 / DIGITAL GAME</div><h3>避震任務</h3><p>以防震知識為主題，透過第一人稱情境模擬防震避難。我主要負責美術設計，並與組員合作使用 Construct 3 製作遊戲及規劃學習回饋。</p>
+<div class="project-details"><details><summary>作品內容與製作歷程</summary><div class="detail-content">
+<p><strong>設計方向</strong><br>以防震知識為主題，將防震避難概念轉化為第一人稱情境模擬遊戲，讓學習者透過情境操作接觸相關知識，而不只是閱讀文字說明。</p>
+<p><strong>製作內容</strong><br>作品以 Construct 3 製作，透過遊戲情境呈現防震避難任務。我主要負責美術設計，並與組員共同討論遊戲內容、操作流程及學習回饋。</p>
+<p><strong>設計思考</strong><br>在遊戲製作過程中，需要同時考量畫面呈現、操作方式與學習內容之間的連結，讓視覺設計能協助學習者理解情境，並使遊戲操作服務於學習目標。</p>
+</div></details></div><div class="project-links"><a class="project-link" href="http://163.21.235.115/11429/ftp_write/5_final//TEACT2026_Earthquake/index.html" target="_blank" rel="noopener">作品<span>↗</span></a><a class="project-link" href="https://canva.link/svhy27c609x2u1m" target="_blank" rel="noopener">簡報<span>↗</span></a><a class="project-link" href="https://drive.google.com/file/d/17IKO51Dj86iH4ZVZvwnZbCgLj2bnwgdK/view?usp=sharing" target="_blank" rel="noopener">企劃書<span>↗</span></a></div></div>
+          </article>
+          <article class="project">
+            <img src="images/3.jpg" alt="數位教材平台封面">
+            <div class="project-body"><div class="project-number">02 / DIGITAL LEARNING</div><h3>數位教材平台</h3><p>以國小三年級「一萬以內的數」為基礎，規劃六款自學互動遊戲；我主要製作付錢與四位數比較大小遊戲，並協助測試、插圖及版型調整。</p>
+<div class="project-details"><details><summary>教材規劃與個人負責內容</summary><div class="detail-content">
+<p><strong>教材主題</strong><br>以國小三年級數學「一萬以內的數」為基礎，規劃六款自學互動遊戲，將數學概念轉化為可操作的數位學習活動。</p>
+<p><strong>個人負責內容</strong><br>我主要製作「付錢」及「四位數比較大小」兩款遊戲，並協助平台測試、插圖製作與版型調整。</p>
+<p><strong>設計思考</strong><br>在設計互動遊戲時，需將數學題目拆解成明確的操作步驟，並透過畫面及操作回應，協助學習者完成練習。平台整體也需維持一致的操作與視覺呈現。</p>
+</div></details></div><div class="project-links"><a class="project-link" href="https://chenyang09060313.github.io/math/" target="_blank" rel="noopener">開啟平台<span>↗</span></a></div></div>
+          </article>
+          <article class="project">
+            <img src="images/4.jpg" alt="布農族文化教育教材封面">
+            <div class="project-body"><div class="project-number">03 / CULTURAL EDUCATION</div><h3>布農族文化教育</h3><p>以多元文化教育課程為基礎，設計布農族文化教案、講義、簡報及數位小遊戲；我負責部分教案，並製作教學簡報、講義與全部數位遊戲。</p>
+<div class="project-details"><details><summary>課程設計與數位教材內容</summary><div class="detail-content">
+<p><strong>課程方向</strong><br>以多元文化教育為基礎，設計布農族文化相關教學內容，將族群文化、生活環境與傳統知識轉化為適合國小學生理解的課程與活動。</p>
+<p><strong>教材規劃</strong><br>課程內容涵蓋布農族語言與八部合音、生活環境中的動植物與氣候、家庭與氏族、傳統服飾，以及小米祭典、傳統食物與農作等主題，並搭配講義、簡報、教案及學習活動。</p>
+<p><strong>個人負責內容</strong><br>我負責部分教案，並製作教學簡報、講義及全部數位小遊戲。遊戲設計包含配對、拖曳等互動形式，讓學生能透過操作複習課程內容。</p>
+<p><strong>設計思考</strong><br>教材以學生能理解的方式介紹文化概念，並將文字知識與地圖、圖像、操作活動結合，讓文化學習不只停留在記憶名詞，也能透過不同形式接觸課程主題。</p>
+</div></details></div><div class="project-links"><a class="project-link" href="https://docs.google.com/document/d/1bCIKUrNweNAJ-vSTHaNe3J-uZNE5uHpe/edit" target="_blank" rel="noopener">講義與簡報<span>↗</span></a><a class="project-link" href="https://ouo-wei.github.io/Bunun_games/" target="_blank" rel="noopener">遊戲彙總<span>↗</span></a><a class="project-link" href="https://drive.google.com/file/d/1YY6iPYnheOkyqQ-MzhPXTswDq85zZ3rI/view?usp=drive_link" target="_blank" rel="noopener">教案<span>↗</span></a></div></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="teaching">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">TEACHING PRACTICE</div>
+          <h2>教學實作經驗</h2>
+          <p class="section-intro">透過數學與國語教材分析、教案規劃及教具設計，累積課程設計與教學實作經驗。</p>
+        </div>
+        <div class="project-grid">
+          <article class="project">
+            <img src="images/6.jpg" alt="國語教材教法封面">
+            <div class="project-body"><div class="project-number">05 / LANGUAGE TEACHING</div><h3>國語教材教法</h3><p>以國小四年級課文〈靜靜的淡水河〉設計五節課教案，我負責第一節教案與教學演示及全組實體教具，並透過教學語言分析反思表達方式。</p>
+<div class="project-details"><details><summary>教學設計與實作經驗</summary><div class="detail-content">
+<p><strong>課程主題</strong><br>以國小四年級課文〈靜靜的淡水河〉為核心，與組員共同規劃五節課的教學內容。</p>
+<p><strong>個人負責內容</strong><br>我負責第一節課教案、教學演示，以及全組實體教具的製作，並參與教材分析與教學活動規劃。</p>
+<p><strong>教學反思</strong><br>透過教學演示與教學語言分析，檢視自己在課堂中的表達方式，留意說明是否清楚、語句是否精簡，以及教學語言如何協助學生掌握課程重點。</p>
+</div></details></div><div class="project-links"><a class="project-link" href="https://drive.google.com/file/d/1hznOKu2bkCR_oHmpT58qKIHh319fBSYM/view?usp=drive_link" target="_blank" rel="noopener">教案<span>↗</span></a><a class="project-link" href="https://drive.google.com/file/d/1jxu1ilRYGwneXliN415Po42MhZQyO9ap/view?usp=drive_link" target="_blank" rel="noopener">語言分析<span>↗</span></a></div></div>
+          </article>
+        
+          <article class="project">
+            <img src="images/5.jpg" alt="數學教材教法封面">
+            <div class="project-body"><div class="project-number">04 / LESSON DESIGN</div><h3>數學教材教法</h3><p>於國小進行數學試教，並協助製作綜合活動使用的互動問答教具。透過實作，累積課堂教學經驗及將數位教材發布為網頁的能力。</p>
+<div class="project-details"><details><summary>教學活動與教具設計</summary><div class="detail-content">
+<p><strong>教學實作</strong><br>透過國小數學試教，將教材內容轉化為課堂中的教學流程與學習活動，累積實際帶領學生學習的經驗。</p>
+<p><strong>教具製作</strong><br>除數學教案外，也協助製作綜合活動使用的互動問答教具，並將數位教材發布為網頁，讓教具能以數位形式呈現及操作。</p>
+<p><strong>設計思考</strong><br>在教學設計與教具製作的過程中，需考量活動與學習目標的關聯，以及學生能否理解題目、順利操作並參與課堂活動。</p>
+</div></details></div><div class="project-links"><a class="project-link" href="https://drive.google.com/file/d/1uMshNLL-SDukR-snGfQB4_kEJWMLdHs_/view?usp=drive_link" target="_blank" rel="noopener">教案<span>↗</span></a><a class="project-link" href="https://wei1216.github.io/10/" target="_blank" rel="noopener">教具<span>↗</span></a></div></div>
+          </article></div>
+      </div>
+    </section>
+
+    <section id="research">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">RESEARCH EXPERIENCE</div>
+          <h2>研究經驗</h2>
+          <p class="section-intro">從高中議題探究到大學專題，持續累積文獻整理、資料蒐集與研究設計經驗。</p>
+        </div>
+        <div class="project-grid">
+          <article class="project">
+            <div class="project-cover"><span>HIGH SCHOOL RESEARCH</span><strong>公共議題與社會探究</strong></div>
+            <div class="project-body"><div class="project-number">06 / HIGH SCHOOL RESEARCH</div><h3>高中小論文</h3><p>從疫情期間高齡者使用科技領取物資的困難出發，探討數位化政策的影響，透過資料蒐集與訪談，初步累積小論文研究經驗。</p>
+<div class="project-details"><details><summary>研究主題與學習歷程</summary><div class="detail-content">
+<p><strong>研究主題</strong><br>以「論Covid-19疫情下數位化政策對高齡者的影響」為題，從疫情期間高齡者使用科技領取物資時可能遭遇的困難出發，探討數位化政策與高齡者生活經驗之間的關係。</p>
+<p><strong>研究歷程</strong><br>透過相關資料蒐集與整理，並結合訪談了解議題中的實際經驗，嘗試從公共議題出發形成研究問題，再將蒐集到的內容組織成小論文與研究海報。</p>
+<p><strong>學習收穫</strong><br>這次經驗讓我初步接觸研究資料的蒐集、整理與呈現，也開始練習將生活中觀察到的問題轉化為可探討的研究主題。</p>
+</div></details></div><div class="project-links"><a class="project-link" href="https://drive.google.com/file/d/1kvGFfg4mrTJifinIf__N466wPFKYPIHL/view?usp=drive_link" target="_blank" rel="noopener">小論文<span>↗</span></a><a class="project-link" href="https://drive.google.com/file/d/1NQ9CLzQXnOygiHLdBG87Y8KzH-gJi9d1/view?usp=drive_link" target="_blank" rel="noopener">研究海報<span>↗</span></a></div></div>
+          </article>
+          <article class="project">
+            <div class="project-cover"><span>UNIVERSITY PROJECT</span><strong>學習歷程多元表現研究</strong></div>
+            <div class="project-body"><div class="project-number">07 / UNIVERSITY PROJECT</div><h3>大學專題研究</h3><p>探討家庭社經背景與高中生多元表現豐富度的關係，目前已完成論文前三章並進行訪談與資料蒐集，仍在持續進行撰寫。</p>
+<div class="project-details"><details><summary>研究內容與目前進度</summary><div class="detail-content">
+<p><strong>研究主題</strong><br>探討家庭社經背景對高中生「多元表現」豐富度的影響，關注家庭背景與學生在高中階段參與幹部經歷、志工服務、校內外比賽、檢定等多元表現之間的關聯。</p>
+<p><strong>研究進行方式</strong><br>研究過程包含文獻蒐集與整理、研究架構規劃及訪談資料蒐集。訪談聚焦於受訪者高中一至三年級的多元表現經驗，並進一步了解家庭背景、家庭資源與家庭影響。</p>
+<p><strong>目前進度</strong><br>目前已完成論文前三章，並已邀請六位受訪者進行訪談與資料蒐集，研究仍持續進行中。</p>
+<p><strong>研究學習</strong><br>透過專題研究，我進一步累積文獻探討撰寫、研究問題與架構整理、訪談大綱規劃及訪談追問等經驗，也逐漸理解研究設計需要在研究目的與實際蒐集到的資料之間持續檢視與調整。</p>
+</div></details></div><div class="project-links"><a class="project-link" href="https://drive.google.com/file/d/1XF4Ta2m49UPGXwPEGOh7dX06XAWXhj0U/view" target="_blank" rel="noopener">論文前三章<span>↗</span></a></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="other">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">ADDITIONAL WORK</div>
+          <h2>其他表現</h2>
+          <p class="section-intro">補充呈現課程中完成的其他教材與學習成果，以精簡方式整理，提供相關作品資料連結。</p>
+        </div>
+        <div class="other-grid">
+          <article class="other-card">
+            <h3>多益證書</h3>
+            <p>TOEIC 閱讀與聽力測驗共獲得 745 分，作為英語能力的補充證明。</p>
+            <div class="project-links">
+              <a class="project-link" href="https://drive.google.com/file/d/1oZNCCbrcmD7xuZAiCH_fqsTJBAOxJxg8/view?usp=sharing" target="_blank" rel="noopener">證書<span>↗</span></a>
+            </div>
+          </article>
+          <article class="other-card">
+            <h3>教學媒體與應用｜RPG Maker</h3>
+            <p>課堂作業製作完整遊戲，透過實作學習運用 RPG Maker 製作遊戲教材。</p>
+            <div class="project-links">
+              <a class="project-link" href="https://drive.google.com/file/d/1wIumDNGrNJNE_MZ6WVXB8AMeZ6pSCcu5/view?usp=drive_link" target="_blank" rel="noopener">遊戲影片<span>↗</span></a>
+            </div>
+          </article>
+          <article class="other-card">
+            <h3>社會學理論基礎</h3>
+            <p>團體作業完成教案並設計教學教材，主要負責教材製作；過程中運用 AI 製作互動小抽籤箱、剪輯媒體及製作學習單。</p>
+            <div class="project-links">
+              <a class="project-link" href="https://drive.google.com/file/d/1OPkq8N6ikO8IExNh1QSSsph2ek6JQWRW/view?usp=drive_link" target="_blank" rel="noopener">簡報<span>↗</span></a>
+              <a class="project-link" href="https://drive.google.com/file/d/1cgoyivLobg0c3Sgq_hQdDa2WON-BngOY/view?usp=drive_link" target="_blank" rel="noopener">教案<span>↗</span></a>
+            </div>
+          </article>
+          <article class="other-card">
+            <h3>數學教材教法｜個人教案</h3>
+            <p>個人作業完成課程規劃、完整教案及教學教材，累積獨立規劃教學活動的經驗。</p>
+            <div class="project-links">
+              <a class="project-link" href="https://drive.google.com/file/d/1pOmup1oLHXiSo5KbU2VBHQRzyJq_dZDV/view?usp=drive_link" target="_blank" rel="noopener">簡報<span>↗</span></a>
+              <a class="project-link" href="https://drive.google.com/file/d/1m0x0SJ0GZydHkPLkWRu6BtHBBBcv_EF_/view?usp=drive_link" target="_blank" rel="noopener">詳案<span>↗</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">NEXT STEP</div>
+          <h2>持續探索與精進</h2>
+        </div>
+        <div class="two-col">
+          <div class="timeline-card"><h3>教育專業</h3><p>持續深化課程設計、教材分析與教學實踐能力，將教育理論轉化為具體的學習活動。</p></div>
+          <div class="timeline-card"><h3>數位媒材與研究</h3><p>結合數位工具、學習者需求與研究方法，持續檢視媒材設計及其在學習歷程中的應用。</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">楊千葳｜教育與數位學習媒材作品集</div></footer>
+</body>
+</html>
